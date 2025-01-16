@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CSCC/mainPage.css">
+        <link rel="stylesheet" href="/CSCC/cardStyles.css">
+        <link rel="stylesheet" href="/CSCC/shopStyles.css">
+        <link rel="icon" href="/Images/icon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Oswald:wght@200..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Stalinist+One&display=swap" rel="stylesheet">
+        <title>CStore</title>
+    </head>
+    <body>
+        <header class="header headerGrid">
+            <h1 class="mainPageHeader"><img src="/Images/icon.png" alt="иконка магазина"> <a href="mainPage.html">CStore</a></h1>
+            <nav class="flexNavCont">
+                <a href="profPage.html">
+                    <img src="/Images/profile.png" alt="Перейти в профиль">
+                </a>
+                <a href="shopPage.html">
+                    <img src="/Images/shop.png" alt="Перейти в корзину">
+                </a>
+            </nav>
+
+            <form id="search-form" class="search-form">
+                <input type="text" name="query" id="search-input" placeholder="Поиск..." required autocomplete="off">
+                <button type="submit">Найти</button>
+            </form>
+
+            <ul id="suggestions" class="suggestions"></ul> <!-- Контейнер для автодополнения -->
+            <div id="results"></div> <!-- Контейнер для результатов поиска -->
+        </header>
+
+        <main class="shopMain" id="pageStart">
+
+            <section class="basket-section">
+                <h1>Корзина</h1>
+                <div class="basket-content">
+                    <div id="empty-basket-message" style="display: none;">
+                        Корзина пуста. Перейдите в каталог, чтобы добавить товары.
+                    </div>
+                </div>
+                <button class="clear-cart-button">Очистить корзину</button>
+            </section>
+
+            <section class="order-section">
+                <h2>Оформление заказа</h2>
+                <form class="order-form">
+                    <label for="name">Имя:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Телефон:</label>
+                    <input type="text" id="phone" name="phone" required>
+
+                    <div class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <label for="newsletter">Согласие на получение рассылки</label>
+                    </div>
+
+                    <label for="address">Адрес доставки:</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="delivery-date">Дата доставки:</label>
+                    <input type="date" id="delivery-date" name="delivery-date" required>
+
+                    <label for="delivery-time">Временной интервал доставки:</label>
+                    <select id="delivery-time" name="delivery-time">
+                        <option value="morning">Утро</option>
+                        <option value="afternoon">День</option>
+                        <option value="evening">Вечер</option>
+                    </select>
+
+                    <label for="comments">Комментарий к заказу:</label>
+                    <textarea id="comments" name="comments" rows="4" required></textarea>
+
+                    <div class="total-cost" id="total-cost">Итоговая стоимость: 0 ₽</div>
+
+                    <button type="submit">Подтвердить заказ</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class= "footerMain footerGrid">
+            <h3>ⒸCShop company 2025 <br> All rights reserved</h3>
+            <div class="getContact">
+                <h4>Возникла проблема?</h4>
+                <a href="mailtoubermensch1937@bk.ru">Напишите письмо в службу поддержки</a>
+                <p>Или позвоните нам по номеру +78805553535</p>
+            </div>
+        </footer>
+    </body>
+    <script src="/JS/shop.js"></script>
+    <script src="/JS/autoComp.js"></script>
+    <script src="/JS/prof.js"></script>
+</html>

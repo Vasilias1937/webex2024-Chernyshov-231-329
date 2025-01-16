@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/CSCC/mainPage.css">
+        <link rel="stylesheet" href="/CSCC/cardStyles.css">
+        <link rel="icon" href="/Images/icon.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Oswald:wght@200..700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Stalinist+One&display=swap" rel="stylesheet">
+        <title>CStore</title>
+    </head>
+
+    <body>
+
+        <header class="header headerGrid">  
+            <h1 class="mainPageHeader"><img src="/Images/icon.png" alt="иконка магазина"> <a href="mainPage.html">CStore</a></h1>  
+            <nav class="flexNavCont">  
+                <a href="profPage.html">  
+                    <img src="/Images/profile.png" alt="Перейти в профиль">  
+                </a>  
+                <a href="shopPage.html">  
+                    <img src="/Images/shop.png" alt="Перейти в корзину">  
+                </a>  
+            </nav>  
+        
+            <form id="search-form" class="search-form">  
+                <input type="text" name="query" id="search-input" placeholder="Поиск..." required autocomplete="off">  
+                <button type="submit">Найти</button>  
+            </form>  
+        
+            <ul id="suggestions" class="suggestions"></ul> <!-- Контейнер для автодополнения -->  
+            <div id="results"></div> <!-- Контейнер для результатов поиска -->  
+        </header>  
+
+        <main class="mainMain mainGrid" id="pageStart">
+           
+            <div class="sidebar">  
+                <form>  
+                    <h2>Фильтры</h2>  
+                    <label>  
+                        <input type="radio" name="cat" value="cat1" checked>  
+                        Категория 1  
+                    </label><br>  
+            
+                    <label>  
+                        <input type="radio" name="cat" value="cat2">  
+                        Категория 2  
+                    </label><br>  
+            
+                    <label>  
+                        <input type="radio" name="cat" value="cat3">  
+                        Категория 3  
+                    </label><br>  
+            
+                    <label>  
+                        <input type="radio" name="cat" value="cat4">  
+                        Категория 4  
+                    </label><br>  
+            
+                    <label for="priceRange">Цена до:</label>  
+                    <input type="range" id="priceRange" class="price-range" min="0" max="1000" value="500" step="10">  
+            
+                    <div class="price-value">  
+                        <span>Максимальная цена: </span><span id="priceDisplay">500</span> рублей  
+                    </div>  
+            
+                    <script>  
+                        const priceRange = document.getElementById('priceRange');  
+                        const priceDisplay = document.getElementById('priceDisplay');  
+                        
+                        priceRange.addEventListener('input', function() {  
+                            priceDisplay.textContent = priceRange.value;  
+                        });  
+                    </script>  
+
+                    <div class="check-box-label">  
+                        <input type="checkbox" id="sellOnly" name="sellOnly" checked>  
+                        <label for="sellOnly">Только товары со скидкой</label>  
+                    </div>  
+            
+                    <button type="submit">Применить</button>  
+                </form>  
+            </div>  
+
+            <div class="catalog-block">  
+                <h2>Каталог</h2>  
+                <label for="sortSelect">Сортировать по:</label>  
+                <select id="sortSelect">  
+                    <option value="name">Названию</option>  
+                    <option value="price">Цене</option>  
+                    <option value="rating">Рейтингу</option>  
+                </select>  
+                
+                <div class="product-container" id="productContainer"></div>  
+                
+                <button id="loadMore" style="display: none;" >Загрузить ещё</button>   
+            </div>  
+
+        </main>
+
+        <footer class= "footerMain footerGrid">
+            <h3>ⒸCShop company 2025 <br> All rights reserved</h3>
+            <div class="getContact">
+                <h4>Возникла проблема?</h4>
+                <a href="mailtoubermensch1937@bk.ru">Напишите письмо в службу поддержки</a>
+                <p>Или позвоните нам по номеру +78805553535</p>
+            </div>
+
+        </footer>   
+
+    </body>
+    <script src="/JS/fetchProducts.js"></script>
+    <script src="/JS/autoComp.js"></script>
+</html>

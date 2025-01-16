@@ -1,0 +1,6 @@
+@mixin getFont($fontSize,$fontWeight,$fontFamily) {
+    font-size: $fontSize;
+    font-weight: $fontWeight;
+    font-family: $fontFamily;
+    font-style: normal;
+}
