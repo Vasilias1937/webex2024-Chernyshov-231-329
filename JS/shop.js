@@ -7,11 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/exam-2024-1/api';
     const apiKey = '791d58e1-3359-45f5-8ec4-7350cd00e872';
 
-
     function getCartItems() {
         return JSON.parse(localStorage.getItem('cart')) || [];
     }
-
 
     function displayCartProducts() {
         const cart = getCartItems();
@@ -42,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTotalCost(cart);
     }
 
-
     function clearCart() {
         localStorage.removeItem('cart');
         basketContent.innerHTML = '';
@@ -50,60 +47,73 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTotalCost([]);
     }
 
-
     function updateTotalCost(cart) {
         const totalCost = cart.reduce((total, product) => total + (product.discount_price || product.actual_price), 0);
         totalCostElement.textContent = `Итоговая стоимость: ${totalCost} ₽`;
     }
 
+    function formatDateToServer(date) {
+        const [year, month, day] = date.split('-');
+        return `${day}.${month}.${year}`;
+    }
+
+    orderForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const fullName = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const deliveryDate = document.getElementById("delivery-date").value.trim();
+        const deliveryInterval = document.getElementById("delivery-time").value.trim();
+        const comment = document.getElementById("comments").value.trim();
+        const cart = getCartItems();
+
+        const formattedDate = formatDateToServer(deliveryDate);
+
+        const orderData = {
+            full_name: fullName,
+            email: email,
+            phone: phone,
+            subscribe: document.getElementById("newsletter").checked,
+            delivery_address: address,
+            delivery_date: formattedDate,
+            delivery_interval: deliveryInterval,
+            comment: comment,
+            good_ids: cart.map(item => item.id)
+        }; 
+
+        await createOrder(orderData);
+    });
 
     async function createOrder(orderData) {
+        console.log(orderData);
+        const url = `${apiUrl}/orders?api_key=${apiKey}`;
         try {
-            const response = await fetch(`${apiUrl}/orders?api_key=${apiKey}`, {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(orderData)
             });
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+
+            if (response.ok) {
+                window.showNotification("Заказ успешно оформлен!");
+                localStorage.removeItem("cart");
+                displayCartProducts();
+            } else {
+                const errorText = await response.text();
+                console.error("Ошибка при оформлении заказа:", response.status, errorText);
+                window.showNotification(`Ошибка при оформлении заказа: ${response.status}`);
             }
-            const data = await response.json();
-            console.log('Order created:', data); // Log the created order for debugging
-            return data;
         } catch (error) {
-            console.error('Ошибка при создании заказа:', error);
+            console.error("Ошибка сети или сервера:", error);
+            window.showNotification("Ошибка при отправке запроса. Проверьте соединение.");
         }
     }
 
-
     clearCartButton.addEventListener('click', clearCart);
-
-    orderForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const orderData = {
-            items: getCartItems().map(item => ({
-                name: item.name,
-                quantity: 1 
-            })),
-            totalCost: parseFloat(totalCostElement.textContent.split(': ')[1].replace(' ₽', '')),
-            name: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            address: formData.get('address'),
-            deliveryDate: formData.get('delivery-date'),
-            deliveryTime: formData.get('delivery-time'),
-            comments: formData.get('comments')
-        };
-
-        const order = await createOrder(orderData);
-        if (order) {
-            alert('Заказ успешно оформлен!');
-            clearCart();
-        }
-    });
 
     displayCartProducts();
 });

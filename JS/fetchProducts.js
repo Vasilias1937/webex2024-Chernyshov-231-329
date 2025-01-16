@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.push(product);
         localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Товар добавлен в корзину');
+        window.showNotification('Товар добавлен в корзину');
     }
 
 

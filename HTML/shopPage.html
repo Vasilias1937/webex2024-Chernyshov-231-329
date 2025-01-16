@@ -70,9 +70,9 @@
 
                     <label for="delivery-time">Временной интервал доставки:</label>
                     <select id="delivery-time" name="delivery-time">
-                        <option value="morning">Утро</option>
-                        <option value="afternoon">День</option>
-                        <option value="evening">Вечер</option>
+                        <option value="08:00-12:00">Утро</option>
+                        <option value="14:00-18:00">День</option> 
+                        <option value="18:00-22:00">Вечер</option>
                     </select>
 
                     <label for="comments">Комментарий к заказу:</label>
@@ -83,9 +83,12 @@
                     <button type="submit">Подтвердить заказ</button>
                 </form>
             </section>
+
         </main>
 
         <footer class= "footerMain footerGrid">
+            <div id="notification-container"></div>
+
             <h3>ⒸCShop company 2025 <br> All rights reserved</h3>
             <div class="getContact">
                 <h4>Возникла проблема?</h4>
@@ -96,5 +99,5 @@
     </body>
     <script src="/JS/shop.js"></script>
     <script src="/JS/autoComp.js"></script>
-    <script src="/JS/prof.js"></script>
+    <script src="/JS/notifications.js"></script>
 </html>

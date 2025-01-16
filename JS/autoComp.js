@@ -3,6 +3,8 @@ const suggestionsList = document.getElementById('suggestions');
 const resultsContainer = document.getElementById('results');
 const apiKey = '791d58e1-3359-45f5-8ec4-7350cd00e872';
 
+
+
 searchInput.addEventListener('input', async () => {
     const query = searchInput.value.trim();
 
@@ -90,7 +92,7 @@ document.getElementById('search-form').addEventListener('submit', async (event) 
         }
     } catch (error) {
         console.error('Ошибка при выполнении запроса:', error);
-        alert("Ошибка при выполнении запроса");
+        window.showNotification("Ошибка при выполнении запроса");
     }
 });
 
@@ -98,5 +100,5 @@ function addToCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cart.push(product);
     localStorage.setItem('cart', JSON.stringify(cart));
-    alert('Товар добавлен в корзину');
+    window.showNotification('Товар добавлен в корзину');
 }
