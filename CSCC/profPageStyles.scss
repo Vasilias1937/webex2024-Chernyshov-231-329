@@ -86,42 +86,42 @@
     cursor: pointer;  
 }  
 
-/* Media Queries for Mobile Responsiveness */  
+
 @media (max-width: 768px) {  
     .profileMain {  
-        padding: 10px; /* Reduce padding on mobile */  
+        padding: 10px;
     }  
 
     .orders-section {  
-        padding: 15px; /* Slightly reduce padding */  
+        padding: 15px;
     }  
 
     .orders-table th, .orders-table td {  
-        padding: 8px; /* Adjust padding for table cells */  
-        font-size: 14px; /* Adjust font size for better readability */  
+        padding: 8px; 
+        font-size: 14px;
     }  
 
     .modal-content {  
-        width: 90%; /* Make modal content wider on mobile */  
-        margin: 10% auto; /* Adjust top margin */  
-        padding: 15px; /* Reduce padding for modals */  
+        width: 90%; 
+        margin: 10% auto; 
+        padding: 15px; 
     }  
 
     .close {  
-        font-size: 24px; /* Make the close button slightly smaller */  
+        font-size: 24px;  
     }  
 }  
 
 @media (max-width: 480px) {  
     .orders-table th, .orders-table td {  
-        font-size: 12px; /* Further reduce font size for very small screens */  
+        font-size: 12px; 
     }  
 
     .modal-content {  
-        padding: 10px; /* Reduce padding in modal for very small screens */  
+        padding: 10px;
     }  
 
     .profileMain {  
-        padding: 5px; /* Minimal padding for small screens */  
+        padding: 5px; 
     }  
 }
